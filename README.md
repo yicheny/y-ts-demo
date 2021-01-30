@@ -2,11 +2,20 @@
 
 此项目用于练习`TypeScript`的使用。
 
-# 项目结构
+# 目标
+- 开发一些工具方法、类使用`TS`开发
+- `React`的`UI组件`、`hook`使用`TS`开发
 
+# 项目结构
 ```
+- doc 存放文档的目录
 - es 存放编译后文件的目录
-- src 存放源代码的目录
+- demo 存放demo代码的目录
+- src 用于测试工作中可能的一些写法
+    - hooks 存放自定义hook
+    - components 存放组件
+    - utils 存放工具方法
+    - class 存放类
 ```
 
 # 快速运行实例
@@ -28,3 +37,12 @@
 ## 运行
 - 终端 => 运行生成任务 => tsc:监视/tsc:构建
 - `Ctrl+Shift+B` => tsc:监视/tsc:构建
+
+# 单元测试
+## 安装依赖
+`npm i --save-dev typescript ts-jest jest @types/jest`
+
+## `jest`配置
+- `npm i jest -g`
+- `jest --init`
+- 调整`jest.config.js`
