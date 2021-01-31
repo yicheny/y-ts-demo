@@ -43,6 +43,32 @@
 `npm i --save-dev typescript ts-jest jest @types/jest`
 
 ## `jest`配置
-- `npm i jest -g`
-- `jest --init`
-- 调整`jest.config.js`
+1. `npm i jest -g`
+2. `jest --init`
+3. 修改配置文件以支持`ts`
+
+```js
+//tsconfig.json
+//注意：不能有注释，结尾不能有分号
+{
+    "compilerOptions":{
+        //……
+        "allowJs": true,//与'ts-jest/presets/js-with-ts'配套设置的     
+    }
+}
+
+//jest.config.js
+const {pathsToModuleNameMapper} = require('ts-jest/utils');
+const {compilerOptions} = require('./tsconfig.json');
+
+module.exports = {
+  //……
+  moduleNameMapper:pathsToModuleNameMapper(compilerOptions.paths),
+  preset:'ts-jest/presets/js-with-ts',
+};
+```
+
+4. 忽略`js`文件测试：在`jest.config.js`配置`testPathIgnorePatterns:["node_modules",".js"]`
+
+# 参考资料
+- [如何对typescript进行单元测试](https://segmentfault.com/a/1190000022030870)
