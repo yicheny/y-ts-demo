@@ -8,8 +8,9 @@
 
 # 项目结构
 ```
-- doc 存放文档的目录
 - es 存放编译后文件的目录
+- doc 存放文档的目录
+- libTest 存放第三方库测试的目录
 - demo 存放demo代码的目录
 - src 用于测试工作中可能的一些写法
     - hooks 存放自定义hook
@@ -72,3 +73,4 @@ module.exports = {
 
 # 参考资料
 - [如何对typescript进行单元测试](https://segmentfault.com/a/1190000022030870)
+- [jest官方配置文档](https://jestjs.io/docs/zh-Hans/configuration#testmatch-arraystring)
