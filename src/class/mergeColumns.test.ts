@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import mergeColumns from './_MergeColumns';
+import mergeColumns from './mergeColumns';
 
 function createSource() {
     return [
