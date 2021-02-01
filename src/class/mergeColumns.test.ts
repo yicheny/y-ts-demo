@@ -13,6 +13,9 @@ const source = createSource();
 
 describe('mergeColumns基础测试', function () {
     it('选取 pick', function () {
+        expect(mergeColumns('header', source).pick().data).toEqual([]);
+        expect(mergeColumns('header', source).pick(source.map(x => x['header'])).data).toEqual(source);
+
         expect(mergeColumns('header', source).pick(['h2', 'h3']).data)
             .toEqual([{ header: 'h2', bind: 'b2' }, { header: 'h3', bind: 'b3' }]);
 
@@ -22,4 +25,16 @@ describe('mergeColumns基础测试', function () {
         expect(mergeColumns('bind', source).pick(['b1']).data)
             .toEqual([{ header: 'h1', bind: 'b1', width: 100 }]);
     });
+
+    it('忽略 omit', function () {
+        expect(mergeColumns('header', source).omit(['h1']).data)
+            .toEqual([{ header: 'h2', bind: 'b2' }, { header: 'h3', bind: 'b3' }]);
+
+        expect(mergeColumns('bind', source).omit(['b2', 'b3']).data)
+            .toEqual([{ header: 'h1', bind: 'b1', width: 100 }]);
+
+        expect(mergeColumns('header', source).omit().data).toEqual(source);
+        expect(mergeColumns('header', source).omit([]).data).toEqual(source);
+        expect(mergeColumns('header', source).omit(source.map(x => x['header'])).data).toEqual([]);
+    })
 })

@@ -27,29 +27,21 @@ class MergeColumns{
         return this;
     }
 
-    // omit(values){
-    //     this._data = _.filter(this._data,x=>!_.includes(values,x[this._key]));
-    //     return this;
-    // }
+    omit(keys?: Array<string>){
+        this._data = _.filter(this._data, x => !_.includes(keys,(<IColumn>x)[this._key]));
+        return this;
+    }
 
-    // _insertKey(key,indexOffset,x){
-    //     if(!_.isNil(x[key])) {
-    //         const item = _.find(this._data,o=>o[this._key] === x[key]);
-    //         if(!item) return null
-    //         const insertIndex = _.indexOf(this._data,item) + indexOffset;
-    //         return this._data.splice(insertIndex,0,_.omit(x,[key]));
+    // _insertKey(key:string,indexOffset:number,x:object){
+    //     if (!_.isNil((<IColumn>x)[key])) {
+    //         const item = _.find(this._data, o => (<IColumn>o)[this._key] === (<IColumn>x)[key]);
+    //         if (!item) return null
+    //         const insertIndex = _.indexOf(this._data, item) + indexOffset;
+    //         return this._data.splice(insertIndex, 0, _.omit(x, [key]));
     //     }
     // }
-
-    // insert(data){
-    //     _.forEach(data,x=>{
-    //         this._insertKey('_beforeKey',0,x);
-    //         this._insertKey('_afterKey',1,x);
-    //     });
-    //     return this;
-    // }
-
-    // update(data){
+    //
+    // update(data:Array<object>){
     //     const keys = _.map(data,x=>x._key);
     //     _.forEach(this._data,(x,i,ary)=>{
     //         if(!_.includes(keys,x[this._key])) return null;
