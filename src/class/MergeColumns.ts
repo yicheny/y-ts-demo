@@ -16,13 +16,9 @@ class MergeColumns{
         this._data = _.isArray(source) ? _.cloneDeep(source) : [];
     }
 
-    static create(key:string, source:Array<object>){
-        return new MergeColumns(key,source);
-    }
-
     pick(keys?:Array<string>){
-        this._data = _.reduce(keys,(acc:Array<object>,key)=>{
-            const col:object | undefined = _.find(this._data,x=>{
+        this._data = _.reduce(keys,(acc:Array<object>,key:string) => {
+            const col: object | undefined = _.find(this._data, x => {
                 return (<IColumn>x)[this._key] === key;
             });
             col && acc.push(col);
@@ -80,5 +76,6 @@ class MergeColumns{
     }
 }
 
-const mergeColumns = MergeColumns.create;
-module.exports = mergeColumns;
+export default function mergeColumns( key: string, source: Array < object >){
+     return new MergeColumns(key,source);
+}
