@@ -37,6 +37,26 @@ describe('mergeColumns基础测试', function () {
         expect(mergeColumns('header', source).omit(source.map(x => x['header'])).data).toEqual([]);
     })
 
+    it('插入 insert', function () {
+        expect(mergeColumns('header',source).insert([{_beforeKey:'h1',header:'h0',bind:'b0'}]).data)
+            .toEqual([ { header: 'h0', bind: 'b0' },
+                { header: 'h1', bind: 'b1', width:100 },
+                { header: 'h2', bind: 'b2' },
+                { header: 'h3', bind: 'b3' } ]);
+
+        expect(mergeColumns('header',source).insert([{_beforeKey:'h3',header:'h2.5',bind:'b2.5'}]).data)
+            .toEqual([ { header: 'h1', bind: 'b1', width:100 },
+                { header: 'h2', bind: 'b2' },
+                { header: 'h2.5',bind:'b2.5'},
+                { header: 'h3', bind: 'b3' } ]);
+
+        expect(mergeColumns('header',source).insert([{_afterKey:'h3',header:'h4',bind:'b4'}]).data)
+            .toEqual([ { header: 'h1', bind: 'b1', width:100 },
+                { header: 'h2', bind: 'b2' },
+                { header: 'h3', bind: 'b3' },
+                { header: 'h4', bind: 'b4' } ]);
+    });
+
     it('更新 update',function (){
         expect(mergeColumns('header',source).update([{_key:'h1',width:300}]).data)
             .toEqual( [ { header: 'h1', bind: 'b1', width: 300 },
@@ -74,5 +94,44 @@ describe('mergeColumns基础测试', function () {
 
         expect(mergeColumns('header', source).tail([{header:'h-1',bind:'b-1'}, {header:'h0',bind:'b0'}]).data)
             .toEqual(source.concat([{header:'h-1',bind:'b-1'}, {header:'h0',bind:'b0'}]))
+    });
+})
+
+describe('mergeColumns组合测试',function(){
+    it('挑选、插入并更新 pick+insert+update',function(){
+        expect(mergeColumns('header', source)
+            .pick(['h1','h3'])
+            .insert([
+                {_beforeKey:'h1',header:'h0',bind:'h0'},
+                {_afterKey:'h3',header:'h4',bind:'h4'}
+            ])
+            .update([
+                {_key:'h0', width:88, bind:'h0-update'},
+                {_key:'h1', width:123},
+                {_key:'h4', bind:'h4-update'},
+            ]).data)
+            .toEqual([{header:'h0', width:88, bind:'h0-update'},
+                {header: 'h1', bind: 'b1', width:123},
+                {header: 'h3', bind: 'b3'},
+                {header:'h4',bind:'h4-update'}]
+            )
+    });
+
+    it('忽略、插入并更新 omit+insert+update',function(){
+        expect(mergeColumns('header', source)
+            .omit(['h2'])
+            .insert([
+                {_beforeKey:'h1',header:'h0',bind:'h0'},
+                {_afterKey:'h3',header:'h4',bind:'h4'}
+            ])
+            .update([
+                {_key:'h0', width:88, bind:'h0-update'},
+                {_key:'h1', width:123},
+                {_key:'h4', bind:'h4-update'},
+            ]).data)
+            .toEqual([{header:'h0', width:88, bind:'h0-update'},
+                {header: 'h1', bind: 'b1', width:123},
+                {header: 'h3', bind: 'b3'},
+                {header:'h4',bind:'h4-update'}])
     });
 })

@@ -33,13 +33,21 @@ class MergeColumns{
         return this;
     }
 
-    _insertKey(key:string,indexOffset:number,x:object){
+    _insertKey(key:string,indexOffset:number,x:IColumn){
         if (!_.isNil((<IColumn>x)[key])) {
             const item = _.find(this._data, o => (<IColumn>o)[this._key] === (<IColumn>x)[key]);
             if (!item) return null
             const insertIndex = _.indexOf(this._data, item) + indexOffset;
             return this._data.splice(insertIndex, 0, _.omit(x, [key]));
         }
+    }
+
+    insert(data:Array<IColumn>){
+        _.forEach(data,x=>{
+            this._insertKey('_beforeKey',0,x);
+            this._insertKey('_afterKey',1,x);
+        });
+        return this;
     }
 
     update(data:Array<IColumn>){
