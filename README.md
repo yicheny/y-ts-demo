@@ -71,6 +71,16 @@ module.exports = {
 
 4. 忽略`js`文件测试：在`jest.config.js`配置`testPathIgnorePatterns:["node_modules",".js"]`
 
+# 实践主题
+- [x] ts单元测试
+- [x] 基础函数编写
+- [x] 基础类编写
+- [ ] 继承类编写
+- [ ] hook编写
+- [ ] React组件编写
+- [ ] 利用ts开发项目
+- [ ] 在已有项目上应用ts
+
 # 参考资料
 - [如何对typescript进行单元测试](https://segmentfault.com/a/1190000022030870)
 - [jest官方配置文档](https://jestjs.io/docs/zh-Hans/configuration#testmatch-arraystring)
