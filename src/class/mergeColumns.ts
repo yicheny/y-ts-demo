@@ -4,6 +4,7 @@ interface IColumn {
     [key: string]: any
 }
 
+type heavyLoadData = IColumn | Array<IColumn>;
 /*
 author: ylf
 * */
@@ -51,17 +52,21 @@ class MergeColumns{
         return this;
     }
 
-    // head(data){
-    //     if(_.isPlainObject(data)) this._data.unshift(data);
-    //     if(_.isArray(data)) this._data = _.concat(data,this._data);
-    //     return this;
-    // }
+    head(data:IColumn) : MergeColumns;
+    head(data:Array<IColumn>) : MergeColumns;
+    head(data:heavyLoadData){
+        if(_.isPlainObject(data)) this._data.unshift(data);
+        if(_.isArray(data)) this._data = _.concat(data,this._data);
+        return this;
+    }
 
-    // tail(data){
-    //     if(_.isPlainObject(data)) this._data.push(data);
-    //     if(_.isArray(data)) this._data = _.concat(this._data,data);
-    //     return this;
-    // }
+    tail(data:IColumn) : MergeColumns;
+    tail(data:Array<IColumn>) : MergeColumns;
+    tail(data:heavyLoadData){
+        if(_.isPlainObject(data)) this._data.push(data);
+        if(_.isArray(data)) this._data = _.concat(this._data,data);
+        return this;
+    }
 
     get data(){
         return this._data;

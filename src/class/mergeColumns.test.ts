@@ -53,4 +53,26 @@ describe('mergeColumns基础测试', function () {
                 { header: 'h2', bind: 'b2' },
                 { header: 'h3', bind: 'b3', width: 88 } ]);
     })
+
+    it('插入头部 head',function (){
+        expect(mergeColumns('header', source).head({header:'h0',bind:'b0'}).data)
+            .toEqual([{header:'h0',bind:'b0'}].concat(source))
+
+        expect(mergeColumns('header', source).head([{header: 'h0', bind: 'b0'}]).data)
+            .toEqual([{header:'h0',bind:'b0'}].concat(source))
+
+        expect(mergeColumns('header', source).head([{header:'h-1',bind:'b-1'}, {header:'h0',bind:'b0'}]).data)
+            .toEqual([{header:'h-1',bind:'b-1'}, {header:'h0',bind:'b0'}].concat(source))
+    });
+
+    it('插入尾部 tail',function (){
+        expect(mergeColumns('header', source).tail({header:'h0',bind:'b0'}).data)
+            .toEqual(source.concat([{header:'h0',bind:'b0'}]))
+
+        expect(mergeColumns('header', source).tail([{header: 'h0', bind: 'b0'}]).data)
+            .toEqual(source.concat([{header:'h0',bind:'b0'}]))
+
+        expect(mergeColumns('header', source).tail([{header:'h-1',bind:'b-1'}, {header:'h0',bind:'b0'}]).data)
+            .toEqual(source.concat([{header:'h-1',bind:'b-1'}, {header:'h0',bind:'b0'}]))
+    });
 })
