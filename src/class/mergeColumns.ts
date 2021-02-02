@@ -11,13 +11,13 @@ class MergeColumns{
     _key:string;
     _data:Array<object>
 
-    constructor(key:string, source:Array<object>) {
+    constructor(key:string, source:Array<IColumn>) {
         this._key = key;
         this._data = _.isArray(source) ? _.cloneDeep(source) : [];
     }
 
     pick(keys?:Array<string>){
-        this._data = _.reduce(keys,(acc:Array<object>,key:string) => {
+        this._data = _.reduce(keys,(acc:Array<IColumn>,key:string) => {
             const col: object | undefined = _.find(this._data, x => {
                 return (<IColumn>x)[this._key] === key;
             });
@@ -32,24 +32,24 @@ class MergeColumns{
         return this;
     }
 
-    // _insertKey(key:string,indexOffset:number,x:object){
-    //     if (!_.isNil((<IColumn>x)[key])) {
-    //         const item = _.find(this._data, o => (<IColumn>o)[this._key] === (<IColumn>x)[key]);
-    //         if (!item) return null
-    //         const insertIndex = _.indexOf(this._data, item) + indexOffset;
-    //         return this._data.splice(insertIndex, 0, _.omit(x, [key]));
-    //     }
-    // }
-    //
-    // update(data:Array<object>){
-    //     const keys = _.map(data,x=>x._key);
-    //     _.forEach(this._data,(x,i,ary)=>{
-    //         if(!_.includes(keys,x[this._key])) return null;
-    //         const item = _.find(data,o=>(o._key === x[this._key]));
-    //         ary[i] = _.assign(x,_.omit(item,['_key']))
-    //     })
-    //     return this;
-    // }
+    _insertKey(key:string,indexOffset:number,x:object){
+        if (!_.isNil((<IColumn>x)[key])) {
+            const item = _.find(this._data, o => (<IColumn>o)[this._key] === (<IColumn>x)[key]);
+            if (!item) return null
+            const insertIndex = _.indexOf(this._data, item) + indexOffset;
+            return this._data.splice(insertIndex, 0, _.omit(x, [key]));
+        }
+    }
+
+    update(data:Array<IColumn>){
+        const keys = _.map(data,x=>x._key);
+        _.forEach(this._data,(x,i,ary)=>{
+            if(!_.includes(keys,(<IColumn>x)[this._key])) return null;
+            const item = _.find(data,o=>(o._key === (<IColumn>x)[this._key]));
+            ary[i] = _.assign(x,_.omit(item,['_key']))
+        })
+        return this;
+    }
 
     // head(data){
     //     if(_.isPlainObject(data)) this._data.unshift(data);
