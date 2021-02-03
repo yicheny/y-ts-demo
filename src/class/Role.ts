@@ -27,7 +27,6 @@ class Role{
         this._sex = options.sex;
     }
 }
-
 class AngelRole extends Role{
     attack(enemyDef:number){
         return this._atk - enemyDef;
