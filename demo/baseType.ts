@@ -15,3 +15,5 @@ const x:[string,number] = ['hello',1];//true
 function error():never{
     throw new Error('error')
 }
+
+let ra:ReadonlyArray<number> = [1,2,3];

@@ -8,15 +8,15 @@
 
 # 项目结构
 ```
-- es 存放编译后文件的目录
-- doc 存放文档的目录
-- libTest 存放第三方库测试的目录
-- demo 存放demo代码的目录
+- es 编译后文件目录
+- doc 文档目录
+- libTest 第三方库测试目录
+- demo demo代码目录
 - src 用于测试工作中可能的一些写法
-    - hooks 存放自定义hook
-    - components 存放组件
-    - utils 存放工具方法
-    - class 存放类
+    - hooks 自定义hook目录
+    - components 组件目录
+    - utils 工具方法目录
+    - class 类目录
 ```
 
 # 快速运行实例
@@ -76,7 +76,7 @@ module.exports = {
 - [x] 基础函数编写
 - [x] 基础类编写
 - [x] 继承类编写
-- [ ] hook编写x
+- [ ] hook编写
 - [ ] React组件编写
 - [ ] 利用ts开发项目
 - [ ] 在已有项目上应用ts
@@ -85,7 +85,7 @@ module.exports = {
 - [x] 类
 - [x] 基础类型
 - [x] 变量声明
-- [ ] 接口
+- [x] 接口
 
 # 参考资料
 - [如何对typescript进行单元测试](https://segmentfault.com/a/1190000022030870)
