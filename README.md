@@ -86,6 +86,7 @@ module.exports = {
 - [x] 基础类型
 - [x] 变量声明
 - [x] 接口
+- [x] 函数
 
 # 参考资料
 - [如何对typescript进行单元测试](https://segmentfault.com/a/1190000022030870)
