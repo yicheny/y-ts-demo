@@ -88,7 +88,8 @@ module.exports = {
 - [x] 接口
 - [x] 函数
 - [x] 泛型
-- [ ] 枚举
+- [x] 枚举
+- [ ] 类型推论
 
 # 参考资料
 - [如何对typescript进行单元测试](https://segmentfault.com/a/1190000022030870)
