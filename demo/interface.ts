@@ -80,3 +80,5 @@ interface SelectableControl extends Control {
 class Button extends Control implements SelectableControl {
     select() { }
 }
+
+export {}

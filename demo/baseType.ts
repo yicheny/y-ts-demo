@@ -17,3 +17,5 @@ function error():never{
 }
 
 let ra:ReadonlyArray<number> = [1,2,3];
+
+export {}

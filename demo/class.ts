@@ -8,3 +8,5 @@ class Dog extends Animal{
 
 let xx: Dog;
 xx = new Dog();
+
+export {}
