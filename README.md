@@ -90,6 +90,8 @@ module.exports = {
 - [x] 泛型
 - [x] 枚举
 - [ ] 类型推论
+- [ ] 类型兼容性
+- [ ] 高级类型
 
 # 参考资料
 - [如何对typescript进行单元测试](https://segmentfault.com/a/1190000022030870)
