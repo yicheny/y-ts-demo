@@ -12,6 +12,8 @@
 - doc 文档目录
 - libTest 第三方库测试目录
 - demo demo代码目录
+    - cleanCodeDemo 代码整洁之道demo
+    - tsDocDemo ts官方文档demo
 - src 用于测试工作中可能的一些写法
     - hooks 自定义hook目录
     - components 组件目录
