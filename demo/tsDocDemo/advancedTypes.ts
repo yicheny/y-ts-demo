@@ -18,3 +18,5 @@ const pet = {
     fly(){}
 };
 if (isFish(pet)) pet.swim();
+
+export {};
